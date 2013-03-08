@@ -15,17 +15,32 @@
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<h3>Column Chart</h3>
 	<p>A vertical var chart
-	</p>
+
+
+
 	<script type="text/javascript">
 
-	var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
-                	11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+	//var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+    //          	11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
 	
 	// Width and height of the chart
-	var w = 500;
+	var w = 900;
 	var h = 300;
-	var barPadding = 3; // space between 2 rects
-	var yScale = 4 // multiplier of the ordinate axi
+	var barPadding = 1; 		// space between 2 rects
+	var yScale = 1; 			// multiplier of the ordinate axi
+	var file = "decrees.csv"
+	
+   	// Reading the data from the CSV file
+   	d3.csv(file, function(error, data) {
+   		var arrDecrets = [];
+   		var arrYears = [];		// borrar
+   		data.forEach(function(d) {
+  			arrDecrets.push(d.decrees);
+    	});
+    	render(arrDecrets);
+    	writeLabels(arrDecrets);	
+  	});
+
 
 	// Create SVG element 
 	var svg = d3.select("body")
@@ -33,8 +48,6 @@
 	            .attr("class", "chart")
 	            .attr("width", w)
 	            .attr("height", h);
-
-
 	/*svg.append("g")
     		.call(d3.svg.axis()
                 .scale(xScale)
@@ -42,70 +55,39 @@
 */
 	//svg.axis().scale(yScale).orientation("bottom");
 
-	// Creating the rects, come on!
+	// The rects, come on!
+
+	function render(myData){
 	svg.selectAll("rect")
-	   .data(dataset)
-	   .enter()
+	   .data(myData)
+	.enter()
 	   .append("rect")
 	   .attr("x", function(d, i) {
-    		return i * w / dataset.length ;  //Bar adjust to the chart size
+    		return i * w / myData.length ;  				// Bar adjust to the chart size
 		})
-	   .attr("y", function(d){ return h - d * yScale} )
-	   .attr("width", w / dataset.length - barPadding)
-	   .attr("height", h)
-	   .attr("fill","darkRed"); // more red on high values
-
-
-
-
-
-	var years = [];
-	var arrDecrets = [];
-
-   	// TODO: manage the csv file
-   	d3.csv("decretos.csv", function(error, data2) {
-
-   		//console.log(data2);
-   		
-
-  		data2.forEach(function(d) {
-  			arrDecrets.push(d.years);
-
-    		//d.decretos = +d.decretos;
-    		console.log(d.decrets);
-
-    	});
-    	//writeLabels(data2);
-    	arrDecrets.push(69);
-    	console.log("Array lleno: " + arrDecrets);
-    	writeLabels(arrDecrets);
-
-  	});
-
-
-//funciona, si
-	function writeLabels(myData){
-		svg.selectAll("text")
-			.data(dataset)
-			.enter()
-			.append("text")
-			.text(function(d){ return d;})
-			.attr("x", function (d,i){return i * w /dataset.length + 5})
-			.attr("y", function (d){return h - d * yScale + 15})
-			.attr("font-family", "sans-serif")
-	   		.attr("font-size", "11px")
-	   		.attr("fill", "white");
-
-	   		console.log("Arr en la función: " + arrDecrets);
-	   		console.log("Dataset?: " + dataset);
-		   
+	   .attr("y", function(d){ return h - d * yScale;} )
+	   .attr("width", w / myData.length - barPadding)
+	   .attr("height", function(d){ return d * yScale;})
+	   .attr("fill","darkRed"); 							// TODO: more red on high values
 	}
 
-	
-
+	// Labels
+	function writeLabels(myData){
+		svg.selectAll("text")
+			.data(myData)
+		.enter()
+			.append("text")
+			.text(function(d){ return d;})
+			.attr("x", function (d,i){return i * w / myData.length + (w / myData.length) / 2;})
+			.attr("y", function (d){return h - d * yScale - 3;})
+			.attr("font-family", "sans-serif")
+	   		.attr("font-size", "11px")
+	   		.attr("font-weight", "bold")
+	   		.attr("text-anchor", "middle")
+	   		.attr("fill", "black");	   
+	}
 
 	</script>
-	<br>
-	
+	<br>	
 </body>
 </html>
