@@ -6,28 +6,27 @@
 <style type="text/css">
 .chart{
 	//color: rgb(100,100,255);
-	background-color: rgb(150,200,255);
-	background-color: lightCyan;
+	//background-color: rgb(150,200,255);
+	//background-color: lightCyan;
 }
 
+p
+{
+	font-family:Lato,Arial,"Times New Roman",Georgia,Serif;
+} 
 </style></head>
+
 <body>
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<h3>Column Chart</h3>
-	<p>A vertical var chart
-
-
-
+	<p>A vertical var chart</p>
 	<script type="text/javascript">
 
-	//var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
-    //          	11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
-	
 	// Width and height of the chart
 	var w = 900;
 	var h = 300;
 	var barPadding = 1; 		// space between 2 rects
-	var yScale = 1; 			// multiplier of the ordinate axi
+	var yScale = 1; 			// multiplier of the ordinate axe
 	var file = "decrees.csv"
 	
    	// Reading the data from the CSV file
@@ -40,7 +39,6 @@
     	render(arrDecrets);
     	writeLabels(arrDecrets);	
   	});
-
 
 	// Create SVG element 
 	var svg = d3.select("body")
@@ -56,7 +54,6 @@
 	//svg.axis().scale(yScale).orientation("bottom");
 
 	// The rects, come on!
-
 	function render(myData){
 	svg.selectAll("rect")
 	   .data(myData)
@@ -68,7 +65,7 @@
 	   .attr("y", function(d){ return h - d * yScale;} )
 	   .attr("width", w / myData.length - barPadding)
 	   .attr("height", function(d){ return d * yScale;})
-	   .attr("fill","darkRed"); 							// TODO: more red on high values
+	   .attr("fill","dimGrey"); 							// TODO: more red on high values
 	}
 
 	// Labels
@@ -86,7 +83,6 @@
 	   		.attr("text-anchor", "middle")
 	   		.attr("fill", "black");	   
 	}
-
 	</script>
 	<br>	
 </body>
