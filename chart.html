@@ -75,7 +75,7 @@ p
 
 	function drawAxis(dataset){
 	var xScale = d3.scale.linear()
-						.domain([1960, d3.max(dataset, function(d) { return d.years; })])
+						.domain([d3.min(dataset, function(d) { return d.years; }), d3.max(dataset, function(d) { return d.years; })])
 						.range([0 + 10 + padding, w - 10 - padding]);
 	var xAxis = d3.svg.axis()
 					.scale(xScale)
