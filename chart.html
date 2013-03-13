@@ -5,13 +5,14 @@
 	<title>D3 examples</title>
 <style type="text/css">
 
-.chart{
-	//background-color: yellow;
+h3{
+	font-family:Lato,Arial,"Times New Roman",Georgia,Serif;
+	padding-left: 400px;
 }
-
 p
 {
 	font-family:Lato,Arial,"Times New Roman",Georgia,Serif;
+	padding-left: 300px;
 } 
 
 .abscissa path,
@@ -31,7 +32,8 @@ p
 <body>
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<h3>Column Chart</h3>
-	<p>A vertical var chart</p>
+	<p>A column chart</p>
+
 	<script type="text/javascript">
 
 	// Width and height of the chart
@@ -68,7 +70,7 @@ p
 	   .attr("y", function(d){ return (h - d.decrees * yScale) - padding;} )
 	   .attr("width", w / dataset.length - barPadding)
 	   .attr("height", function(d){ return d.decrees * yScale;})
-	   .attr("fill","dimGrey"); 							// TODO: more red on high values
+	   .attr("fill","dimGrey"); 													// TODO: change color on high values
 	}
 
 	function drawAxis(dataset){
@@ -99,8 +101,7 @@ p
 	   		.attr("text-anchor", "middle")
 	   		.attr("fill", "black");	   
 	}
-
 	</script>
-	<br>	
+
 </body>
 </html>
