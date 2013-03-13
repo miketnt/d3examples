@@ -32,17 +32,16 @@ p
 <body>
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<h3>Column Chart</h3>
-	<p>A column chart with less bars: 1978 - 2013<br>
-		<a href="chart2.html">Go to the grey chart</a></p>
+	<p>A column chart</p>
 
 	<script type="text/javascript">
 
 	// Width and height of the chart
 	var w = 900;
 	var h = 300;
-	var barPadding = 3; 		// space between 2 rects
+	var barPadding = 1; 		// space between 2 rects
 	var yScale = 1; 			// multiplier of the ordinate axe
-	var file = "decreesFrom78.csv"
+	var file = "decrees.csv"
 	var padding = 20;			// between the chart and the bounds of the svg element
 
 	// Create SVG element 
@@ -71,12 +70,12 @@ p
 	   .attr("y", function(d){ return (h - d.decrees * yScale) - padding;} )
 	   .attr("width", w / dataset.length - barPadding)
 	   .attr("height", function(d){ return d.decrees * yScale;})
-	   .attr("fill","black"); 													// TODO: change color on high values
+	   .attr("fill","dimGrey"); 													// TODO: change color on high values
 	}
 
 	function drawAxis(dataset){
 	var xScale = d3.scale.linear()
-						.domain([d3.min(dataset, function(d) { return d.years; }), d3.max(dataset, function(d) { return d.years; })])
+						.domain([1960, d3.max(dataset, function(d) { return d.years; })])
 						.range([0 + 10 + padding, w - 10 - padding]);
 	var xAxis = d3.svg.axis()
 					.scale(xScale)
@@ -94,7 +93,7 @@ p
 		.enter()
 			.append("text")
 			.text(function(d){ console.log (d.decrees); return d.decrees;})
-			.attr("x", function (d,i){return i * (w - 2 * padding) / dataset.length + padding + (w / dataset.length) / 2 - barPadding;})
+			.attr("x", function (d,i){return i * (w - 2 * padding) / dataset.length + padding + (w / dataset.length) / 2;})
 			.attr("y", function (d){return (h - d.decrees * yScale - 3) - padding;})
 			.attr("font-family", "sans-serif")
 	   		.attr("font-size", "11px")
@@ -103,5 +102,6 @@ p
 	   		.attr("fill", "black");	   
 	}
 	</script>
+
 </body>
 </html>

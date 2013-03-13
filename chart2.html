@@ -32,8 +32,9 @@ p
 <body>
 	<script src="http://d3js.org/d3.v3.js"></script>
 	<h3>Column Chart</h3>
-	<p>A column chart with less bars: 1978 - 2013<br>
-		<a href="chart2.html">Go to the grey chart</a></p>
+	<p>A column chart with full bars: 1960 - 2013<br>
+		<a href="index.html">Go to the black chart</a></p>
+
 
 	<script type="text/javascript">
 
@@ -42,7 +43,7 @@ p
 	var h = 300;
 	var barPadding = 3; 		// space between 2 rects
 	var yScale = 1; 			// multiplier of the ordinate axe
-	var file = "decreesFrom78.csv"
+	var file = "decrees.csv"
 	var padding = 20;			// between the chart and the bounds of the svg element
 
 	// Create SVG element 
@@ -71,7 +72,7 @@ p
 	   .attr("y", function(d){ return (h - d.decrees * yScale) - padding;} )
 	   .attr("width", w / dataset.length - barPadding)
 	   .attr("height", function(d){ return d.decrees * yScale;})
-	   .attr("fill","black"); 													// TODO: change color on high values
+	   .attr("fill","dimGrey"); 													// TODO: change color on high values
 	}
 
 	function drawAxis(dataset){
