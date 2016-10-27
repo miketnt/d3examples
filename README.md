@@ -1,4 +1,4 @@
 d3examples
 ==========
 
-Testing the JavaScritp library d3js
+Testing the JavaScript library d3js
